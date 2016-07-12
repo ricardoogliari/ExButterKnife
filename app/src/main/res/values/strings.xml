@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ExButterKnife</string>
+    <string name="message_error">Usuário e/ou senha inválidos!</string>
+    <string name="entrar">Entrar</string>
+</resources>

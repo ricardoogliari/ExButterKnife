@@ -1,5 +1,7 @@
 package estudos.dcbmobile.com.exbutterknife;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,17 +14,10 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.edtNome)
-    EditText edtNome;
-    @BindView(R.id.edtSenha)
-    EditText edtSenha;
-    @BindView(R.id.edtConfirmSenha)
-    EditText edtConfirmarSenha;
+    @BindView(R.id.edtNome) public EditText edtNome;
+    @BindView(R.id.edtSenha) public EditText edtSenha;
 
     @BindString(R.string.message_error) String messageError;
-    //@BindDrawable(R.drawable.graphic) Drawable graphic;
-    //@BindColor(R.color.red) int red;
-    //@BindDimen(R.dimen.spacer) Float spacer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +28,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void entrar(View view){
-        if (edtNome.getText().toString().equals("abc") && edtSenha.getText().toString().equals("abc")){
-            getFragmentManager().beginTransaction().add(R.id.frame, new FragmentInicial()).commitAllowingStateLoss();
+        if (edtNome.getText().toString().equals("a") &&
+                edtSenha.getText().toString().equals("a")){
+            FragmentManager fragMgr = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragMgr.beginTransaction();
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.add(
+                    R.id.frame, new FragmentInicial());
+            fragmentTransaction.commitAllowingStateLoss();
         } else {
-            Toast.makeText(this, "teste " + messageError, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, messageError, Toast.LENGTH_LONG).show();
         }
     }
 }
-
-// https://www.sitepoint.com/tidying-code-with-android-butterknife/
-// http://jakewharton.github.io/butterknife/
-// https://github.com/JakeWharton/butterknife#download

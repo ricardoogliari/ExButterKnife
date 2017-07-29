@@ -36,8 +36,10 @@ public class FragmentInicial extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_inicial, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_inicial, container,
+                false);
         unbinder = ButterKnife.bind(this, view);
 
         ButterKnife.apply(viewsCompra, DISABLE);
@@ -45,6 +47,19 @@ public class FragmentInicial extends Fragment {
 
         return view;
     }
+
+    static final ButterKnife.Action<View> DISABLE =
+            new ButterKnife.Action<View>() {
+        @Override public void apply(View view, int index) {
+            view.setEnabled(false);
+        }
+    };
+    static final ButterKnife.Setter<View, Boolean> ENABLED =
+            new ButterKnife.Setter<View, Boolean>() {
+        @Override public void set(View view, Boolean value, int index) {
+            view.setEnabled(value);
+        }
+    };
 
     @Override public void onDestroyView() {
         super.onDestroyView();
@@ -64,14 +79,6 @@ public class FragmentInicial extends Fragment {
         ButterKnife.apply(viewsVenda, ENABLED, false);
     }
 
-    /*
-    @Nullable @BindView(R.id.might_not_be_there) TextView mightNotBeThere;
-    @Optional @OnClick(R.id.maybe_missing) void onMaybeMissingClicked() {
-
-    }
-
-     */
-
     @OnClick(R.id.btnVender)
     public void vender() {
         ButterKnife.apply(viewsCompra, ENABLED, false);
@@ -80,7 +87,7 @@ public class FragmentInicial extends Fragment {
 
     /*
     @OnClick({ R.id.door1, R.id.door2, R.id.door3 })
-    public void pickDoor(DoorView door) {
+    public void pickDoor(View door) {
       if (door.hasPrizeBehind()) {
         Toast.makeText(this, "You win!", LENGTH_SHORT).show();
       } else {
@@ -89,15 +96,6 @@ public class FragmentInicial extends Fragment {
     }
      */
 
-    static final ButterKnife.Action<View> DISABLE = new ButterKnife.Action<View>() {
-        @Override public void apply(View view, int index) {
-            view.setEnabled(false);
-        }
-    };
-    static final ButterKnife.Setter<View, Boolean> ENABLED = new ButterKnife.Setter<View, Boolean>() {
-        @Override public void set(View view, Boolean value, int index) {
-            view.setEnabled(value);
-        }
-    };
+
 
 }
